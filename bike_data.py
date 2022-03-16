@@ -6,6 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 np.set_printoptions(threshold=np.inf)
 
 # Read the data from the CSV file
+train_1 = pd.read_csv("day.csv")
 train = pd.read_csv("day.csv")
 train=train.drop(['dteday','hum','windspeed','casual','registered'],axis=1)
 print(train.head())
