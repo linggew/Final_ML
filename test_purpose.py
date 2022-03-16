@@ -20,7 +20,7 @@ sns.set()
 # plt.scatter(bike_data.train_1["registered"],bike_data.train_1["cnt"])
 
 #求得相关系数，判别哪些因素相关性高，哪些因素相关性低
-# correlation = bike_data.W.corr()
+# correlation = bike_data.train_1.corr()
 # mask = np.array(correlation)
 # mask[np.tril_indices_from(mask)] = False
 # fig,ax = plt.subplots()
