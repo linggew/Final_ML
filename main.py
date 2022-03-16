@@ -56,3 +56,4 @@ print("the accuary is accuacy",accuary)
 # axes.plot(lr.coef_)
 # axes.set_title('lrg_coef')
 # plt.show()
+# 1
