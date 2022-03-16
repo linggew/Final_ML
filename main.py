@@ -64,7 +64,7 @@ accuary=add/ad
 print("the accuary is accuacy",accuary)
 # score=lr.score(test_x,test_y)
 # print(score)
-# Get coef bu linear regression 
+# Get coef by linear regression 
 # axes=plt.subplot(221)
 # axes.plot(lr.coef_)
 # axes.set_title('lrg_coef')
