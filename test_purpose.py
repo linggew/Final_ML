@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 sns.set()
-#用来测试各个因素与目标值得关系，画出散点图
+#Used to test the relationship between each factor and the target value, draw a scatter plot
 # plt.scatter(bike_data.train_1["dteday"],bike_data.train_1["cnt"])
 # plt.scatter(bike_data.train_1["weathersit"],bike_data.train_1["cnt"])
 # plt.scatter(bike_data.train_1["weekday"],bike_data.train_1["cnt"])
@@ -19,7 +19,7 @@ sns.set()
 # plt.scatter(bike_data.train_1["casual"],bike_data.train_1["cnt"])
 # plt.scatter(bike_data.train_1["registered"],bike_data.train_1["cnt"])
 
-#求得相关系数，判别哪些因素相关性高，哪些因素相关性低
+#Get the correlation coefficient to determine which factors have high correlation and which factors have low correlation
 # correlation = bike_data.train_1.corr()
 # mask = np.array(correlation)
 # mask[np.tril_indices_from(mask)] = False
