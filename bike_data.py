@@ -1,56 +1,39 @@
-# This file is to pre-process the origional data set
 import pandas as pd
-import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
-np.set_printoptions(threshold=np.inf)
-
-# Read the data from the CSV file
+# read the dataset
 train_1 = pd.read_csv("day.csv")
-train = pd.read_csv("day.csv")
-train=train.drop(['dteday','hum','windspeed','casual','registered'],axis=1)
+
+#delete the attributes with have low correlation
+train = train_1.drop(['dteday','hum','windspeed','casual','registered'],axis=1)
 print(train.head())
-#print("train : " + str(train.shape))
+print("train : " + str(train.shape))
 
-# For categorical features, observe the value range and histogram
-categorical_features = ['season', 'mnth', 'weathersit', 'weekday']
-
-
-# Convert the data type to object for easy handling by get_dummies
-for col in categorical_features:
+#The feature should do one-hot transfer since the limitation value range of them
+feature = ['season', 'mnth', 'weathersit', 'weekday']
+for col in feature:
+    # transfor the data type to object which can be handled by get_dummies
     train[col] = train[col].astype('object')
+train_feature = train[feature]
+train_feature = pd.get_dummies(train_feature)
+print('the result of one-hot')
+print(train_feature)
 
-# convert data into one_hot form
-X_train_cat = train[categorical_features]
-X_train_cat = pd.get_dummies(X_train_cat)
-print('The result of one_hot')
-print(X_train_cat)
-
-mn_X = MinMaxScaler()
-numerical_features = ['temp', 'atemp']
-temp = mn_X.fit_transform(train[numerical_features])
-X_train_num = pd.DataFrame(data=temp, columns=numerical_features, index=train.index)
-print('Result of Data normalization processing ')
-print(X_train_num.head())
-
-# Concat the related data column 
-X_train = pd.concat([X_train_cat, X_train_num, train['holiday'], train['workingday']], axis=1, ignore_index=False)
+# combine data
+X_train = pd.concat([train_feature, train['temp'],train['atemp'], train['holiday'], train['workingday']], axis=1, ignore_index=False)
 print('X_train.head(): ')
 print(X_train.head())
+final_train = pd.concat([train['instant'], X_train, train['yr'],train['cnt']], axis=1)
+final_train = final_train.drop('instant',axis=1)
 
-# Concat the data
-FE_train = pd.concat([train['instant'], X_train, train['yr'], train['cnt']], axis=1)
-FE_train = FE_train.drop('instant',axis=1)
+# final_train.to_csv('fianl.csv', index=False)  # creat final dataset file
+print('final_train.head():')
+print(final_train.head())
+print(final_train.info())
 
-# Save file 
-FE_train.to_csv('FE_day.csv', index=False)  
-
-
-print('FE_train.head():')
-print(FE_train.head())
-print(FE_train.info())
-trainset = FE_train[:585]
-testset=FE_train[585:]
+#separate the train and test set 8:2
+trainset = final_train[:585]
+testset=final_train[585:]
 print(trainset)
 print(testset)
 
