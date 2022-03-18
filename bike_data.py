@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
+
 
 # read the dataset
 train_1 = pd.read_csv("day.csv")
